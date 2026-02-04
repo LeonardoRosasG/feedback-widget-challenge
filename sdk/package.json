@@ -1,0 +1,52 @@
+{
+  "name": "feedback-widget-sdk",
+  "version": "1.0.0",
+  "description": "Lightweight feedback widget SDK",
+  "author": "Leo",
+  "license": "MIT",
+  "keywords": ["feedback", "widget", "sdk", "rating", "survey"],
+  
+  "main": "dist/feedback-widget.cjs.js",
+  "module": "dist/feedback-widget.esm.js",
+  "browser": "dist/feedback-widget.umd.min.js",
+  "unpkg": "dist/feedback-widget.umd.min.js",
+  "types": "dist/types/index.d.ts",
+  
+  "exports": {
+    ".": {
+      "import": "./dist/feedback-widget.esm.js",
+      "require": "./dist/feedback-widget.cjs.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  
+  "files": [
+    "dist"
+  ],
+  
+  "scripts": {
+    "build": "npm run clean && npm run build:bundle && npm run build:types",
+    "build:bundle": "rollup -c",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
+    "clean": "rm -rf dist",
+    "dev": "rollup -c -w",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.9.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

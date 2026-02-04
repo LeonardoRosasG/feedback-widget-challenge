@@ -1,0 +1,22 @@
+ARCHITECTURE DECISION RECORD (ADR)
+
+El proyecto adopta una arquitectura cliente-servidor desacoplada, donde el SDK 
+frontend actúa como un widget embebible independiente y el backend expone una 
+API REST stateless. Para el SDK se eligió TypeScript por su tipado estático que 
+reduce errores en tiempo de desarrollo, y Rollup como bundler por su capacidad 
+de generar múltiples formatos de salida (UMD, ESM, CJS) en bundles optimizados, 
+permitiendo integración tanto en aplicaciones modernas con módulos ES como en 
+entornos legacy mediante script tags. El patrón Event-Driven implementado en el 
+widget permite una comunicación reactiva con la aplicación host sin acoplamiento 
+directo, facilitando la extensibilidad.
+
+En el backend se utilizó ASP.NET Core con .NET 10 siguiendo Clean Architecture 
+con separación en capas (Api, Application, Domain, Infrastructure), lo que 
+garantiza testabilidad y mantenibilidad a largo plazo. Se optó por Minimal APIs 
+sobre Controllers por su menor overhead y sintaxis más concisa para endpoints 
+simples. Entity Framework Core con SQLite proporciona persistencia ligera ideal 
+para desarrollo y despliegues sin dependencias externas. FluentValidation maneja 
+la validación de requests de forma declarativa y extensible, mientras que la 
+autenticación mediante API Key en middleware centralizado ofrece seguridad 
+simple pero efectiva para este tipo de widget público. Swagger/OpenAPI se 
+incluye para documentación automática e interactiva de la API.
